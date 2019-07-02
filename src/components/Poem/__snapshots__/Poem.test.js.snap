@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Poem should render  1`] = `
+<styled.h2>
+  Rose are 
+  , violet are 
+</styled.h2>
+`;
