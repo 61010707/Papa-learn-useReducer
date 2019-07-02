@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hello should mount 1`] = `
+<_default>
+  <div>
+    This is div
+    <styled.div>
+      <StyledComponent
+        forwardedComponent={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bdVaJa",
+              "isStatic": true,
+              "lastClassName": "jtOXgR",
+              "rules": Array [
+                "
+  background-color: teal;
+",
+              ],
+            },
+            "displayName": "styled.div",
+            "foldedComponentIds": Array [],
+            "render": [Function],
+            "styledComponentId": "sc-bdVaJa",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          }
+        }
+        forwardedRef={null}
+      >
+        <div
+          className="sc-bdVaJa jtOXgR"
+        >
+          This is Div with styled
+        </div>
+      </StyledComponent>
+    </styled.div>
+    <Styled(styled.div)>
+      <StyledComponent
+        forwardedComponent={
+          Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "attrs": Array [],
+            "componentStyle": ComponentStyle {
+              "componentId": "sc-bwzfXH",
+              "isStatic": true,
+              "lastClassName": "ugvnr",
+              "rules": Array [
+                "
+  background-color: teal;
+",
+                "
+  background-color: red;
+  font-size: 30px;
+",
+              ],
+            },
+            "displayName": "Styled(styled.div)",
+            "foldedComponentIds": Array [
+              "sc-bdVaJa",
+            ],
+            "render": [Function],
+            "styledComponentId": "sc-bwzfXH",
+            "target": "div",
+            "toString": [Function],
+            "warnTooManyClasses": [Function],
+            "withComponent": [Function],
+          }
+        }
+        forwardedRef={null}
+      >
+        <div
+          className="sc-bdVaJa sc-bwzfXH ugvnr"
+        >
+          This is Extra Div styled
+        </div>
+      </StyledComponent>
+    </Styled(styled.div)>
+  </div>
+</_default>
+`;
+
+exports[`Hello should render  1`] = `
+<div>
+  This is div
+  <styled.div>
+    This is Div with styled
+  </styled.div>
+  <Styled(styled.div)>
+    This is Extra Div styled
+  </Styled(styled.div)>
+</div>
+`;
+
+exports[`Hello should render 1`] = `
+<div>
+  This is div
+  <div
+    class="sc-bdVaJa jtOXgR"
+  >
+    This is Div with styled
+  </div>
+  <div
+    class="sc-bdVaJa sc-bwzfXH ugvnr"
+  >
+    This is Extra Div styled
+  </div>
+</div>
+`;
