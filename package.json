@@ -1,8 +1,8 @@
 {
-  "name": "Papa-react-boilerplate",
+  "name": "Papa-learn-useReducer",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/61010707/Papa-react-boilerplate.git",
+  "repository": "https://github.com/61010707/Papa-learn-useReducer.git",
   "author": "DrZin <61010707@kmitl.ac.th>",
   "license": "MIT",
   "dependencies": {
