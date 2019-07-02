@@ -29819,7 +29819,65 @@ if ("development" !== 'production' && "development" !== 'test' && typeof window 
 
 var _default = styled;
 exports.default = _default;
-},{"stylis/stylis.min":"../node_modules/stylis/stylis.min.js","stylis-rule-sheet":"../node_modules/stylis-rule-sheet/index.js","react":"../node_modules/react/index.js","@emotion/unitless":"../node_modules/@emotion/unitless/dist/unitless.browser.esm.js","react-is":"../node_modules/react-is/index.js","memoize-one":"../node_modules/memoize-one/dist/memoize-one.esm.js","prop-types":"../node_modules/prop-types/index.js","@emotion/is-prop-valid":"../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js","merge-anything":"../node_modules/merge-anything/dist/index.esm.js","process":"../node_modules/process/browser.js"}],"components/Poem/index.js":[function(require,module,exports) {
+},{"stylis/stylis.min":"../node_modules/stylis/stylis.min.js","stylis-rule-sheet":"../node_modules/stylis-rule-sheet/index.js","react":"../node_modules/react/index.js","@emotion/unitless":"../node_modules/@emotion/unitless/dist/unitless.browser.esm.js","react-is":"../node_modules/react-is/index.js","memoize-one":"../node_modules/memoize-one/dist/memoize-one.esm.js","prop-types":"../node_modules/prop-types/index.js","@emotion/is-prop-valid":"../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js","merge-anything":"../node_modules/merge-anything/dist/index.esm.js","process":"../node_modules/process/browser.js"}],"store/constant.js":[function(require,module,exports) {
+UPDATE_COLOR = "UPDATE_COLOR";
+UPDATE_NUMBER = "UPDATE_NUMBER";
+module.exports = {
+  UPDATE_COLOR: UPDATE_COLOR,
+  UPDATE_NUMBER: UPDATE_NUMBER
+};
+},{}],"store/Store.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = Store;
+exports.CTX = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _constant = _interopRequireDefault(require("../store/constant"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var CTX = _react.default.createContext();
+
+exports.CTX = CTX;
+var initState = {
+  color: "red",
+  number: 0
+};
+
+var reducer = function reducer(state, action) {
+  switch (action.type) {
+    case _constant.default.UPDATE_COLOR:
+      return _objectSpread({}, state, {
+        color: action.payload
+      });
+
+    case _constant.default.UPDATE_NUMBER:
+      return _objectSpread({}, state, {
+        number: state.number + 1
+      });
+
+    default:
+      throw Error("reducer error");
+  }
+};
+
+function Store(props) {
+  var stateHooks = _react.default.useReducer(reducer, initState);
+
+  return _react.default.createElement(CTX.Provider, {
+    value: stateHooks
+  }, props.children);
+}
+},{"react":"../node_modules/react/index.js","../store/constant":"store/constant.js"}],"components/Poem/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29827,11 +29885,35 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = _interopRequireWildcard(require("react"));
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
+var _Store = require("../../store/Store.js");
+
+var _constant = _interopRequireDefault(require("../../store/constant"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n  margin: 5px;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
 
 function _templateObject() {
   var data = _taggedTemplateLiteral(["\n  color: whitesmoke;\n"]);
@@ -29847,12 +29929,41 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var Main = _styledComponents.default.h2(_templateObject());
 
-var _default = function _default(props) {
-  return _react.default.createElement(Main, null, "Rose are ", props.color, ", violet are ", props.color);
+var Button = _styledComponents.default.button(_templateObject2());
+
+var _default = function _default() {
+  var _useContext = (0, _react.useContext)(_Store.CTX),
+      _useContext2 = _slicedToArray(_useContext, 2),
+      appState = _useContext2[0],
+      setAppState = _useContext2[1];
+
+  var handleClick = function handleClick(e) {
+    setAppState({
+      type: _constant.default.UPDATE_COLOR,
+      payload: e.target.value
+    });
+  };
+
+  return _react.default.createElement("div", null, _react.default.createElement(Main, null, " ", "Rose are ", appState.color, ", violet are ", appState.color, " number", " ", appState.number), _react.default.createElement(Button, {
+    value: "Blue",
+    onClick: handleClick
+  }, "Blue"), _react.default.createElement(Button, {
+    value: "Green",
+    onClick: handleClick
+  }, "Green"), _react.default.createElement(Button, {
+    value: "Red",
+    onClick: handleClick
+  }, "Red"), _react.default.createElement(Button, {
+    onClick: function onClick() {
+      setAppState({
+        type: _constant.default.UPDATE_NUMBER
+      });
+    }
+  }, "number +"));
 };
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"page/App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../../store/Store.js":"store/Store.js","../../store/constant":"store/constant.js"}],"page/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29865,6 +29976,8 @@ var _react = _interopRequireDefault(require("react"));
 var _Poem = _interopRequireDefault(require("../components/Poem"));
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _Store = _interopRequireDefault(require("../store/Store"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29895,14 +30008,12 @@ var Div = _styledComponents.default.div(_templateObject());
 var PoemStyled = (0, _styledComponents.default)(_Poem.default)(_templateObject2());
 
 var App = function App() {
-  return _react.default.createElement(Div, null, _react.default.createElement(PoemStyled, {
-    color: "red"
-  }));
+  return _react.default.createElement(_Store.default, null, _react.default.createElement(Div, null, _react.default.createElement(PoemStyled, null)));
 };
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../components/Poem":"components/Poem/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../components/Poem":"components/Poem/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../store/Store":"store/Store.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -30016,7 +30127,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42209" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42025" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

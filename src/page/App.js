@@ -2,7 +2,7 @@ import React from "react";
 
 import Poem from "../components/Poem";
 import styled from "styled-components";
-
+import Store from "../store/Store";
 const Div = styled.div`
   display: flex;
   flex-direction: column;
@@ -19,9 +19,11 @@ const PoemStyled = styled(Poem)``;
 
 const App = () => {
   return (
-    <Div>
-      <PoemStyled color={"red"} />
-    </Div>
+    <Store>
+      <Div>
+        <PoemStyled />
+      </Div>
+    </Store>
   );
 };
 
